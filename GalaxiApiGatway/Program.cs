@@ -14,6 +14,16 @@ builder.Services.AddOcelot();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.WithOrigins("*")
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+    //.AllowCredentials());
+});
+
+
 
 var app = builder.Build();
 
@@ -24,6 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();

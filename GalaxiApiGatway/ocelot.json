@@ -1,10 +1,31 @@
 {
-  "GlobalConfiguration": {
-    "EndPointId": "{action}/{id}",
-    "EndPoint": "{action}",
-    "ApiFunction": "Functions"
-  },
   "Routes": [
+
+    //MICROSERVICES IDENTITY
+    {
+      "DownstreamPathTemplate": "/{EndPoint}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 41191
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/identity/{EndPoint}",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{action}/{value}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 41191
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/identity/{action}/{value}",
+      "UpstreamHttpMethod": [ "Get", "Delete", "Put" ]
+    },
 
     //MICROSERVICES FUNCTIONS
     {
@@ -16,14 +37,11 @@
           "Port": 17878
         }
       ],
-      "UpstreamPathTemplate": "/ApiGateway/Functions/{EndPoint}",
+      "UpstreamPathTemplate": "/ApiGateway/Function/{EndPoint}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
-      //"AddHeadersToRequest": {
-      //  "Authorization": "Bearer {token}"
-      //}
     },
     {
-      "DownstreamPathTemplate": "/{EndPointId}",
+      "DownstreamPathTemplate": "/{action}/{value}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -31,14 +49,13 @@
           "Port": 17878
         }
       ],
-      "UpstreamPathTemplate": "/ApiGateway/Functions/{EndPointId}",
+      "UpstreamPathTemplate": "/ApiGateway/Function/{action}/{value}",
       "UpstreamHttpMethod": [ "Get", "Delete", "Put" ]
     },
 
 
     //MICROSERVICES MOVIES
     {
-      //"DownstreamPathTemplate": "/{controller}/{action}",
       "DownstreamPathTemplate": "/{EndPoint}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -47,15 +64,11 @@
           "Port": 37061
         }
       ],
-      "UpstreamPathTemplate": "/ApiGateway/movie/{EndPoint}",
-      //"UpstreamPathTemplate": "{BaseUrl}",
+      "UpstreamPathTemplate": "/ApiGateway/Movie/{EndPoint}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
-      //"AddHeadersToRequest": {
-      //  "Authorization": "Bearer {token}"
-      //}
     },
     {
-      "DownstreamPathTemplate": "/{EndPointId}",
+      "DownstreamPathTemplate": "/{action}/{value}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -63,10 +76,34 @@
           "Port": 37061
         }
       ],
-      "UpstreamPathTemplate": "/ApiGateway/movie/{EndPointId}",
-      //"UpstreamPathTemplate": "/ApiGateway/{BaseUrlId}",
+      "UpstreamPathTemplate": "/ApiGateway/Movie/{action}/{value}",
       "UpstreamHttpMethod": [ "Get", "Delete", "Put" ]
     },
 
+    //MICROSERVICES TICKETS
+    {
+      "DownstreamPathTemplate": "/{EndPoint}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 35206
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Ticket/{EndPoint}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{EndPointId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 35206
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Ticket/{EndPointId}",
+      "UpstreamHttpMethod": [ "Get", "Delete", "Put" ]
+    }
   ]
 }
