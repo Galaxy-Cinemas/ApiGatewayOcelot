@@ -60,12 +60,12 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "movieapi",
+          "Host": "moviequeryapi",
           "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/ApiGateway/Movie/{EndPoint}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get" ]
     },
     {
       "DownstreamPathTemplate": "/{action}/{value}",
@@ -77,7 +77,19 @@
         }
       ],
       "UpstreamPathTemplate": "/ApiGateway/Movie/{action}/{value}",
-      "UpstreamHttpMethod": [ "Get", "Delete", "Put" ]
+      "UpstreamHttpMethod": [ "Delete", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{action}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "movieapi",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/ApiGateway/Movie/{action}",
+      "UpstreamHttpMethod": [ "Post"]
     },
 
     //MICROSERVICES TICKETS
